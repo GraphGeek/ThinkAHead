@@ -1,0 +1,9 @@
+.appnav{
+  height: 5em;
+  background-image: url('../assets/pictures/Many-gears_1920x1200.png');
+}
+
+.menu{
+  margin-left: 10%;
+  margin-right: 10%;
+}

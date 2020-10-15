@@ -1,0 +1,38 @@
+<form>
+  <div class="form-group">
+    <label for="player1">Joueur 1</label>
+    <input type="text" id="player1" placeholder="exemple: David Lopez" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <label for="player2">Joueur 2</label>
+    <input type="text" id="player2" placeholder="exemple: Joe Lopez" class="form-control"/>
+  </div>
+  <button type="button" class="btn btn-dark">Lancer une partie</button>
+</form>
+<div *ngIf="scores != null; else elseBlock">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Joueur 1</th>
+        <th scope="col">Score</th>
+        <th scope="col">Joueur 2</th>
+        <th scope="col">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let score of scores; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ score.split("/")[0] }}</td>
+        <td>{{ score.split("/")[1] | number }}</td>
+        <td>{{ score.split("/")[2] }}</td>
+        <td>{{ score.split("/")[3] | number }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #elseBlock>
+  <ngb-alert type="secondary" [dismissible]="false" class="info"
+    >Aucun score enregistrés...</ngb-alert
+  >
+</ng-template>
