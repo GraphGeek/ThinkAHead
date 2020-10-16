@@ -7,7 +7,7 @@
           formControlName="player1"
           type="text"
           id="player1"
-          placeholder="ex: David Lopez"
+          [placeholder]="'ex: ' + exPlayer1[randForEx]"
           class="form-control"
         />
       </div>
@@ -19,7 +19,7 @@
           formControlName="player2"
           type="text"
           id="player2"
-          placeholder="ex: Joe Lopez"
+          [placeholder]="'ex: ' + exPlayer2[randForEx]"
           class="form-control"
         />
       </div>
