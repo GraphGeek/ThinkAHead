@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { GameComponent } from './game/game.component';
 import { LocalStorageService } from 'src/assets/services/local-storage.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LocalStorageService } from 'src/assets/services/local-storage.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent]
