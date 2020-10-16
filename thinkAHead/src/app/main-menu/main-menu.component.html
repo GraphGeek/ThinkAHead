@@ -1,15 +1,45 @@
-<form>
-  <div class="form-group">
-    <label for="player1">Joueur 1</label>
-    <input type="text" id="player1" placeholder="exemple: David Lopez" class="form-control"/>
+<form class="form" [formGroup]="playerForm" (submit)="launchGame()">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="player1">Joueur 1</label>
+        <input
+          formControlName="player1"
+          type="text"
+          id="player1"
+          placeholder="ex: David Lopez"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="player2">Joueur 2</label>
+        <input
+          formControlName="player2"
+          type="text"
+          id="player2"
+          placeholder="ex: Joe Lopez"
+          class="form-control"
+        />
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="player2">Joueur 2</label>
-    <input type="text" id="player2" placeholder="exemple: Joe Lopez" class="form-control"/>
+    <label for="squareSize">Taille du carré</label>
+    <select id="squareSize" class="custom-select" formControlName="squareSize">
+      <option value="3">3x3</option>
+      <option value="5">5x5</option>
+    </select>
   </div>
-  <button type="button" class="btn btn-dark">Lancer une partie</button>
+  <div class="text-center">
+    <button type="submit" [disabled]="this.playerForm.invalid" class="btn btn-dark" style="margin-bottom: 60px">
+      Lancer une partie
+    </button>
+  </div>
 </form>
-<div *ngIf="scores != null; else elseBlock">
+
+<div class="text-center" *ngIf="scores != null; else elseBlock">
   <table class="table table-striped">
     <thead>
       <tr>

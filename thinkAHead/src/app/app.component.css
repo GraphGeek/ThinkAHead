@@ -3,7 +3,8 @@
   background-image: url('../assets/pictures/Many-gears_1920x1200.png');
 }
 
-.menu{
-  margin-left: 10%;
-  margin-right: 10%;
+.AH{
+  cursor: url('../assets/pictures/AH.png'), auto;
+  color: white;
+  font-style: unset;
 }

@@ -2,3 +2,15 @@
   width: fit-content;
   margin: auto;
 }
+
+.form{
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+@media only screen and (min-width: 600px) {
+  .table {
+    margin-left: 10%;
+    width: 80%;
+  }
+}
