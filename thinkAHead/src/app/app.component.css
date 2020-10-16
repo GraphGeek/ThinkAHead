@@ -6,5 +6,5 @@
 .AH{
   cursor: url('../assets/pictures/AH.png'), auto;
   color: white;
-  font-style: unset;
+  text-decoration: none;
 }

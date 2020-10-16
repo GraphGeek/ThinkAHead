@@ -10,12 +10,21 @@ import { LocalStorageService } from 'src/assets/services/local-storage.service';
 })
 export class MainMenuComponent implements OnInit {
   public scores: string[];
+  public timeToDuel = new Audio('../assets/sounds/timeToDuel.mp3');
   public exPlayer1 = [
     'Joe Lopez',
     'Pain au chocolat',
     'Lacrimatica',
     'Un hotel ?',
     'Maître Yoda',
+    'David Lafarge',
+    'Olive',
+    'Cyprien',
+    'Booba',
+    'Michou',
+    'Naruto Uzumaki',
+    'Terrance',
+    'Macron',
   ];
   public exPlayer2 = [
     'David Lopez',
@@ -23,6 +32,14 @@ export class MainMenuComponent implements OnInit {
     'Pourquoi ?',
     'Trivago',
     'Lorenzo Becker',
+    'Miss Jirachi',
+    'Tom',
+    'Cortex',
+    'Kaaris',
+    'InoxTag',
+    'Sasuke Uchiwa',
+    'Philippe',
+    'Gilet jaune',
   ];
   public randForEx = Math.floor(
     Math.random() * Math.floor(this.exPlayer1.length)
@@ -63,5 +80,7 @@ export class MainMenuComponent implements OnInit {
         squareSize: this.playerForm.get('squareSize').value,
       },
     });
+    this.timeToDuel.load();
+    this.timeToDuel.play();
   }
 }

@@ -3,3 +3,8 @@
 label, button{
   cursor: pointer;
 }
+
+.form{
+  margin-left: 10%;
+  margin-right: 10%;
+}

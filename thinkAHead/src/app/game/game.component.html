@@ -1,1 +1,30 @@
-<p>game works!</p>
+<form class="form" [formGroup]="gameForm" (submit)="saveScores()">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="score1">Joueur 1</label>
+        <input
+          formControlName="score1"
+          type="number"
+          id="score1"
+          placeholder="score"
+          class="form-control"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="score2">Joueur 2</label>
+        <input
+          formControlName="score2"
+          type="number"
+          id="score2"
+          placeholder="score"
+          class="form-control"
+          disabled
+        />
+      </div>
+    </div>
+  </div>
+</form>
