@@ -85,7 +85,8 @@ export class MainMenuComponent implements OnInit {
     this.timeToDuel.play();
     setTimeout(() => {
       this.fightTheme.load();
-      this.fightTheme.play();
+      this.fightTheme.volume = 0.5;
+      // this.fightTheme.play();
     }, 3000);
   }
 }

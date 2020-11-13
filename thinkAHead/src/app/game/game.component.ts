@@ -45,6 +45,9 @@ export class GameComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    for(let i = 0; i < this.getRandomInt(0, 10); i++){
+      this.actualTurn = !this.actualTurn;
+    }
     this.route.queryParams.subscribe((params) => {
       if (params['squareSize'] != undefined) {
         this.squareSize = params['squareSize'];
