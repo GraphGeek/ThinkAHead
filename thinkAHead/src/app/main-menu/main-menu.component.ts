@@ -11,6 +11,7 @@ import { LocalStorageService } from 'src/assets/services/local-storage.service';
 export class MainMenuComponent implements OnInit {
   public scores: string[];
   public timeToDuel = new Audio('../assets/sounds/timeToDuel.mp3');
+  public fightTheme = new Audio('../assets/sounds/fightTheme.mp3');
   public exPlayer1 = [
     'Joe Lopez',
     'Pain au chocolat',
@@ -24,7 +25,7 @@ export class MainMenuComponent implements OnInit {
     'Michou',
     'Naruto Uzumaki',
     'Terrance',
-    'Macron',
+    'Emmanuel Macron',
   ];
   public exPlayer2 = [
     'David Lopez',
@@ -72,7 +73,7 @@ export class MainMenuComponent implements OnInit {
     this.scores = this.localStorage.getScores();
   }
 
-  launchGame() {
+  async launchGame() {
     this.router.navigate(['/game'], {
       queryParams: {
         player1: this.playerForm.get('player1').value,
@@ -82,5 +83,9 @@ export class MainMenuComponent implements OnInit {
     });
     this.timeToDuel.load();
     this.timeToDuel.play();
+    setTimeout(() => {
+      this.fightTheme.load();
+      this.fightTheme.play();
+    }, 3000);
   }
 }

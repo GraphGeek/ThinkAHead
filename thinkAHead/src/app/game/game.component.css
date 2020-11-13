@@ -1,0 +1,21 @@
+.card{
+  text-align: center;
+  cursor: pointer;
+  width: 66px;
+  height: 66px;
+
+  /* Empêcher la surbrillance (séléction) */
+  -moz-user-select: none; /* Firefox */
+  -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+  -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+  user-select: none; /* Propriété standard */
+}
+
+.checked{
+  background-color: rgb(255, 116, 116) !important;
+}
+
+.unclickable{
+  background-color: rgb(223, 223, 223);
+  cursor: default;
+}

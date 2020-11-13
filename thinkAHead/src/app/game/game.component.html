@@ -1,29 +1,379 @@
 <form class="form" [formGroup]="gameForm" (submit)="saveScores()">
+  <p>
+    <ngb-alert
+      style="width: fit-content; margin-left: auto; margin-right: auto"
+      [type]="'secondary'"
+      [dismissible]="false"
+    >
+      <strong *ngIf="actualTurn">{{ player1 }}</strong>
+      <strong *ngIf="!actualTurn">{{ player2 }}</strong> à toi de jouer !
+    </ngb-alert>
+  </p>
   <div class="row">
     <div class="col">
       <div class="form-group">
-        <label for="score1">Joueur 1</label>
+        <label for="score1">{{ player1 }}</label>
         <input
           formControlName="score1"
           type="number"
           id="score1"
           placeholder="score"
           class="form-control"
-          disabled
         />
       </div>
     </div>
     <div class="col">
       <div class="form-group">
-        <label for="score2">Joueur 2</label>
+        <label for="score2">{{ player2 }}</label>
         <input
           formControlName="score2"
           type="number"
           id="score2"
           placeholder="score"
           class="form-control"
-          disabled
         />
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout="row">
+      <div
+        (click)="finishPlayerTurn(board[0][0], '0/0')"
+        class="card"
+        [ngClass]="{
+          checked: board[0][0] == 'X',
+          unclickable: this.selectedLineColumn.split('|')[0] != '0/0'
+        }"
+      >
+        <div class="card-body">
+          {{ board[0][0] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[0][1], '0/1')"
+        class="card"
+        [ngClass]="{
+          checked: board[0][1] == 'X',
+          unclickable:
+            this.selectedLineColumn.split('|')[0] != '0/1' &&
+            this.selectedLineColumn.split('|')[1] != '0/1'
+        }"
+      >
+        <div class="card-body">
+          {{ board[0][1] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[0][2], '0/2')"
+        class="card"
+        [ngClass]="{
+          checked: board[0][2] == 'X',
+          unclickable:
+            this.selectedLineColumn.split('|')[0] != '0/2' &&
+            this.selectedLineColumn.split('|')[2] != '0/2'
+        }"
+      >
+        <div class="card-body">
+          {{ board[0][2] }}
+        </div>
+      </div>
+      <div
+        *ngIf="this.squareSize > 3"
+        (click)="finishPlayerTurn(board[0][3], '0/3')"
+        class="card"
+        [ngClass]="{
+          checked: board[0][3] == 'X',
+          unclickable:
+            this.selectedLineColumn.split('|')[0] != '0/3' &&
+            this.selectedLineColumn.split('|')[3] != '0/3'
+        }"
+      >
+        <div class="card-body">
+          {{ board[0][3] }}
+        </div>
+      </div>
+      <div
+        *ngIf="this.squareSize > 4"
+        (click)="finishPlayerTurn(board[0][4], '0/4')"
+        class="card"
+        [ngClass]="{ checked: board[0][4] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[0] != '0/4' &&
+          this.selectedLineColumn.split('|')[4] != '0/4'
+        }"
+      >
+        <div class="card-body">
+          {{ board[0][4] }}
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div
+        (click)="finishPlayerTurn(board[1][0], '1/0')"
+        class="card"
+        [ngClass]="{ checked: board[1][0] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[0] != '1/0' &&
+          this.selectedLineColumn.split('|')[1] != '1/0'
+        }"
+      >
+        <div class="card-body">
+          {{ board[1][0] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[1][1], '1/1')"
+        class="card"
+        [ngClass]="{ checked: board[1][1] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[1] != '1/1'
+        }"
+      >
+        <div class="card-body">
+          {{ board[1][1] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[1][2], '1/2')"
+        class="card"
+        [ngClass]="{ checked: board[1][2] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[1] != '1/2' &&
+          this.selectedLineColumn.split('|')[2] != '1/2'
+        }"
+      >
+        <div class="card-body">
+          {{ board[1][2] }}
+        </div>
+      </div>
+      <div
+        *ngIf="this.squareSize > 3"
+        (click)="finishPlayerTurn(board[1][3], '1/3')"
+        class="card"
+        [ngClass]="{ checked: board[1][3] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[1] != '1/3' &&
+          this.selectedLineColumn.split('|')[3] != '1/3'
+        }"
+      >
+        <div class="card-body">
+          {{ board[1][3] }}
+        </div>
+      </div>
+      <div
+        *ngIf="this.squareSize > 4"
+        (click)="finishPlayerTurn(board[1][4], '1/4')"
+        class="card"
+        [ngClass]="{ checked: board[1][4] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[1] != '1/4' &&
+          this.selectedLineColumn.split('|')[4] != '1/4'
+        }"
+      >
+        <div class="card-body">
+          {{ board[1][4] }}
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div
+        (click)="finishPlayerTurn(board[2][0], '2/0')"
+        class="card"
+        [ngClass]="{ checked: board[2][0] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[0] != '2/0' &&
+          this.selectedLineColumn.split('|')[2] != '2/0'
+        }"
+      >
+        <div class="card-body">
+          {{ board[2][0] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[2][1], '2/1')"
+        class="card"
+        [ngClass]="{ checked: board[2][1] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[1] != '2/1' &&
+          this.selectedLineColumn.split('|')[2] != '2/1'
+        }"
+      >
+        <div class="card-body">
+          {{ board[2][1] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[2][2], '2/2')"
+        class="card"
+        [ngClass]="{ checked: board[2][2] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[2] != '2/2'
+        }"
+      >
+        <div class="card-body">
+          {{ board[2][2] }}
+        </div>
+      </div>
+      <div
+        *ngIf="this.squareSize > 3"
+        (click)="finishPlayerTurn(board[2][3], '2/3')"
+        class="card"
+        [ngClass]="{ checked: board[2][3] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[2] != '2/3' &&
+          this.selectedLineColumn.split('|')[3] != '2/3'
+        }"
+      >
+        <div class="card-body">
+          {{ board[2][3] }}
+        </div>
+      </div>
+      <div
+        *ngIf="this.squareSize > 4"
+        (click)="finishPlayerTurn(board[2][4], '2/4')"
+        class="card"
+        [ngClass]="{ checked: board[2][4] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[2] != '2/4' &&
+          this.selectedLineColumn.split('|')[4] != '2/4'
+        }"
+      >
+        <div class="card-body">
+          {{ board[2][4] }}
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" *ngIf="this.squareSize > 3">
+      <div
+        (click)="finishPlayerTurn(board[3][0], '3/0')"
+        class="card"
+        [ngClass]="{ checked: board[3][0] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[0] != '3/0' &&
+          this.selectedLineColumn.split('|')[3] != '3/0'
+        }"
+      >
+        <div class="card-body">
+          {{ board[3][0] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[3][1], '3/1')"
+        class="card"
+        [ngClass]="{ checked: board[3][1] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[1] != '3/1' &&
+          this.selectedLineColumn.split('|')[3] != '3/1'
+        }"
+      >
+        <div class="card-body">
+          {{ board[3][1] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[3][2], '3/2')"
+        class="card"
+        [ngClass]="{ checked: board[3][2] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[2] != '3/2' &&
+          this.selectedLineColumn.split('|')[3] != '3/2'
+        }"
+      >
+        <div class="card-body">
+          {{ board[3][2] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[3][3], '3/3')"
+        class="card"
+        [ngClass]="{ checked: board[3][3] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[3] != '3/3'
+        }"
+      >
+        <div class="card-body">
+          {{ board[3][3] }}
+        </div>
+      </div>
+      <div
+        *ngIf="this.squareSize > 4"
+        (click)="finishPlayerTurn(board[3][4], '3/4')"
+        class="card"
+        [ngClass]="{ checked: board[3][4] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[3] != '3/4' &&
+          this.selectedLineColumn.split('|')[4] != '3/4'
+        }"
+      >
+        <div class="card-body">
+          {{ board[3][4] }}
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" *ngIf="this.squareSize > 4">
+      <div
+        (click)="finishPlayerTurn(board[4][0], '4/0')"
+        class="card"
+        [ngClass]="{ checked: board[4][0] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[0] != '4/0' &&
+          this.selectedLineColumn.split('|')[4] != '4/0'
+        }"
+      >
+        <div class="card-body">
+          {{ board[4][0] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[4][1], '4/1')"
+        class="card"
+        [ngClass]="{ checked: board[4][1] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[1] != '4/1' &&
+          this.selectedLineColumn.split('|')[4] != '4/1'
+        }"
+      >
+        <div class="card-body">
+          {{ board[4][1] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[4][2], '4/2')"
+        class="card"
+        [ngClass]="{ checked: board[4][2] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[2] != '4/2' &&
+          this.selectedLineColumn.split('|')[4] != '4/2'
+        }"
+      >
+        <div class="card-body">
+          {{ board[4][2] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[4][3], '4/3')"
+        class="card"
+        [ngClass]="{ checked: board[4][3] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[3] != '4/3' &&
+          this.selectedLineColumn.split('|')[4] != '4/3'
+        }"
+      >
+        <div class="card-body">
+          {{ board[4][3] }}
+        </div>
+      </div>
+      <div
+        (click)="finishPlayerTurn(board[4][4], '4/4')"
+        class="card"
+        [ngClass]="{ checked: board[4][4] == 'X',
+        unclickable:
+          this.selectedLineColumn.split('|')[4] != '4/4'
+        }"
+      >
+        <div class="card-body">
+          {{ board[4][4] }}
+        </div>
       </div>
     </div>
   </div>
